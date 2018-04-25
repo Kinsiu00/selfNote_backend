@@ -11,22 +11,24 @@ const show = id => {
         .then( rows => rows)
         .catch(error => {console.error(error);})
 }
-const create = ({address, message, name, subject}) => {
+const create = ({address, carrier, subject, message, time}) => {
     console.log(address)
     return knex('notes')
     .returning('*')
     .insert({
         address: address,
+        carrier: carrier,
+        subject: subject,
         message: message,
-        name: name,
-        subject: subject})
+        time: time
+       })
     .then(row => row[0])
     .catch(error => {console.error(error)})
 }
 const update = (id, updates) => {
     return knex('notes')
     .returning('*')
-    .update({...updates, updated_at: new Date(Date.now()).toISOString() })
+    .update({...updates, updated_at: new Date(Date.now())})
     .where('id', id)
     .then(row => row[0])
     .catch(error => {console.error(error)})
