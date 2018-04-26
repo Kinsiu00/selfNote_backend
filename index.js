@@ -23,13 +23,36 @@ module.exports = app;
 // using SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
 const sgMail = require('@sendgrid/mail');
-const key = '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';
+const key = '';
 sgMail.setApiKey(key);
 const msg = {
-  to: 'self.note00@gmail.com',
+  to: '7326983973.txt.att.net',
   from: 'self.note00@gmail.com',
   subject: 'initial email test',
   text: 'text-line',
   html: '<strong>Initial email test success</strong>',
 };
-// sgMail.send(msg);
+sgMail.send(msg);
+
+const sniffer = () => {
+  let currentTime = Date.now()
+  console.log(new Date(currentTime))
+  knex('notes')
+  .where('timeNum', '<=', currentTime)
+  .then(rows => {
+    console.log(rows)
+    rows.forEach(obj => {
+      let message = {
+        to: `${obj.address}@txt.att.net`,
+        from: 'self.note00@gmail.com',
+        subject: obj.subject,
+        text: obj.message,
+        html: obj.message
+      }
+      sgMail.send(message)
+    })
+  })
+  .catch(error => {console.error(error)})
+}
+// setInterval(sniffer, 10000)
+// sniffer()

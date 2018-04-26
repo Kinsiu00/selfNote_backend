@@ -11,7 +11,7 @@ const show = id => {
         .then( rows => rows)
         .catch(error => {console.error(error);})
 }
-const create = ({address, carrier, subject, message, time}) => {
+const create = ({address, carrier, subject, message, time, timeNum}) => {
     console.log(address)
     return knex('notes')
     .returning('*')
@@ -20,7 +20,8 @@ const create = ({address, carrier, subject, message, time}) => {
         carrier: carrier,
         subject: subject,
         message: message,
-        time: time
+        time: time,
+        timeNum: timeNum
        })
     .then(row => row[0])
     .catch(error => {console.error(error)})
