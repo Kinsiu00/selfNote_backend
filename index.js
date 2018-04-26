@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const knex = require('./db');
 const PORT = process.env.PORT || 3077;
 const appRoutes = require('./routes/app');
+const text = require('./text')
 app.use(cors());
 app.use(morgan('combined'));
 app.use(express.json()); //bodyparse
@@ -17,42 +18,5 @@ app.listen( PORT, () => {
 
 
 module.exports = app;
-
-
-
-// using SendGrid's v3 Node.js Library
-// https://github.com/sendgrid/sendgrid-nodejs
-const sgMail = require('@sendgrid/mail');
-const key = '';
-sgMail.setApiKey(key);
-const msg = {
-  to: '.txt.att.net',
-  from: '',
-  subject: 'initial email test',
-  text: 'text-line',
-  html: '<strong>Initial email test success</strong>',
-};
-sgMail.send(msg);
-
-const sniffer = () => {
-  let currentTime = Date.now()
-  console.log(new Date(currentTime))
-  knex('notes')
-  .where('timeNum', '<=', currentTime)
-  .then(rows => {
-    console.log(rows)
-    rows.forEach(obj => {
-      let message = {
-        to: `${obj.address}@txt.att.net`,
-        from: '',
-        subject: obj.subject,
-        text: obj.message,
-        html: obj.message
-      }
-      sgMail.send(message)
-    })
-  })
-  .catch(error => {console.error(error)})
-}
-// setInterval(sniffer, 10000)
-// sniffer()
+setInterval(text.sniffer, 10000)
+setInterval(text.swipper, 11000)
