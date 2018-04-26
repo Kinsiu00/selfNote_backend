@@ -26,8 +26,8 @@ const sgMail = require('@sendgrid/mail');
 const key = '';
 sgMail.setApiKey(key);
 const msg = {
-  to: '7326983973.txt.att.net',
-  from: 'self.note00@gmail.com',
+  to: '.txt.att.net',
+  from: '',
   subject: 'initial email test',
   text: 'text-line',
   html: '<strong>Initial email test success</strong>',
@@ -44,7 +44,7 @@ const sniffer = () => {
     rows.forEach(obj => {
       let message = {
         to: `${obj.address}@txt.att.net`,
-        from: 'self.note00@gmail.com',
+        from: '',
         subject: obj.subject,
         text: obj.message,
         html: obj.message
