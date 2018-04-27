@@ -18,5 +18,5 @@ app.listen( PORT, () => {
 
 
 module.exports = app;
-setInterval(text.sniffer, 10000)
-setInterval(text.swipper, 11000)
+// setInterval(text.sniffer, 10000)
+// setInterval(text.swipper, 11000)
