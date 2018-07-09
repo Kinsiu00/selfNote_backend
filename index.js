@@ -6,6 +6,7 @@ const knex = require('./db');
 const PORT = process.env.PORT || 3077;
 const appRoutes = require('./routes/app');
 const text = require('./text')
+
 app.use(cors());
 app.use(morgan('combined'));
 app.use(express.json()); //bodyparse
@@ -18,5 +19,5 @@ app.listen( PORT, () => {
 
 
 module.exports = app;
-// setInterval(text.sniffer, 10000)
-// setInterval(text.swipper, 11000)
+setInterval(text.sniffer, 10000)
+setInterval(text.swiper, 10100)
