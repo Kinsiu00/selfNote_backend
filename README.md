@@ -33,7 +33,6 @@ NOTE: a Sendgrid API key is needed to use the application.
 - export the key with 'module.export = key'
 
 Once the database and connection has been set up, simply run "npm start" in the root directory of the backend.
-Once the database and connection has been set up, simply run "npm start" in the root directory of the backend.
 
 ## How to use
 
